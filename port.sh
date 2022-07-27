@@ -15,6 +15,25 @@ if   [[ $port -gt $num ]] ; then
    echo "ERROR: Not a Valid Port Number" >&2; exit 1
 fi
 
+if   [[ $port == 21 ]] ; then
+   echo "ERROR: This port is not allowed due to the security." >&2; exit 1
+fi
+
+dup=$(cat /etc/shorewall/rules | grep $port )
+
+#echo $dup
+
+
+if [[ -z $dup ]];
+
+then
+      echo	"Good to Go!"
+
+else
+
+	echo "ERROR: Port is already in use."
+	exit
+fi
 
 
 sed -i "/tcp.*4200/i ACCEPT\t\tnet\tfw\ttcp\t$port\t\t\t#Custom port by PO" "/etc/shorewall/rules"
