@@ -19,7 +19,7 @@ if   [[ $port == 21 ]] ; then
    echo "ERROR: This port is not allowed due to the security." >&2; exit 1
 fi
 
-dup=$(cat /etc/shorewall/rules | grep $port )
+dup=$(awk  '/[0-9]/ {print $5}'  /etc/shorewall/rules | grep $port )
 
 #echo $dup
 
