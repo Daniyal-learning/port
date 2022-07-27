@@ -1,7 +1,7 @@
 #!/bin/bash
 
 text="ERROR"
-echo -e "Provide Port Number:"
+echo "Provide Port Number:"
 read port < /dev/tty
 
 re='^[0-9]+$'
