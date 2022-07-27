@@ -1,13 +1,21 @@
 #!/bin/bash
 
 text="ERROR"
-echo "Provide Port Number:"
+echo -e "Provide Port Number:"
 read port < /dev/tty
 
 re='^[0-9]+$'
-if ! [[ $port =~ $re ]] ; then
+if !  [[ $port =~ $re ]] ; then
    echo "ERROR: Not a Valid Port Number" >&2; exit 1
 fi
+
+num=65535
+
+if   [[ $port -gt $num ]] ; then
+   echo "ERROR: Not a Valid Port Number" >&2; exit 1
+fi
+
+
 
 sed -i "/tcp.*4200/i ACCEPT\t\tnet\tfw\ttcp\t$port\t\t\t#Custom port by PO" "/etc/shorewall/rules"
 
