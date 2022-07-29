@@ -1,8 +1,14 @@
 #!/bin/bash
 
+port_enable()
+{
 text="ERROR"
+
+: again
 echo -e "Provide Port Number:"
 read port < /dev/tty
+
+
 
 re='^[0-9]+$'
 if !  [[ $port =~ $re ]] ; then
@@ -19,9 +25,8 @@ if   [[ $port == 21 ]] ; then
    echo "ERROR: This port is not allowed due to the security." >&2; exit 1
 fi
 
-dup=$(awk  '/[0-9]/ {print $5}'  /etc/shorewall/rules | grep $port )
+dup=$(cat /etc/shorewall/rules | grep $port )
 
-#echo $dup
 
 
 if [[ -z $dup ]];
@@ -48,3 +53,19 @@ if [[ "$out" == *"$text"* ]]; then
 	exit
 fi
 echo -e "Port has been enabled."
+
+echo -e "Do you want to enable another port?(y/n)"
+read ans < /dev/tty
+ 
+if [ $ans == y ];
+  then port_enable
+  exit 0
+      elif [ $an == n ];
+      then echo "Exiting Program"
+      exit 0
+      fi
+
+}
+
+port_enable
+rm -rf port.sh
