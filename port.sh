@@ -61,7 +61,7 @@ if [ $ans == y ];
   then port_enable
   exit 0
       elif [ $ans == n ];
-      then echo "BYE BYE!"
+      then echo "BYE BYE!!"
       exit 0
       fi
 
