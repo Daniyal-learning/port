@@ -60,8 +60,8 @@ read ans < /dev/tty
 if [ $ans == y ];
   then port_enable
   exit 0
-      elif [ $an == n ];
-      then echo "Exiting Program"
+      elif [ $ans == n ];
+      then echo "BYE BYE!"
       exit 0
       fi
 
